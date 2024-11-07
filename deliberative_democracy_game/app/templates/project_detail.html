@@ -21,8 +21,7 @@
 
         <!-- Contribution Input Fields -->
         <label>Contribute Labor (Max {{ user.resources | selectattr('type', 'equalto', 'Labor') |
-            map(attribute='amount')
-            | sum }}):</label>
+            map(attribute='amount') | sum }}):</label>
         <input type="number" name="contribute_labor_{{ user.id }}" min="0" value="0"><br>
 
         <label>Contribute Money (Max {{ user.resources | selectattr('type', 'equalto', 'Money') |
@@ -32,8 +31,13 @@
         <label>Contribute Time (Max {{ user.resources | selectattr('type', 'equalto', 'Time') |
             map(attribute='amount') | sum }}):</label>
         <input type="number" name="contribute_time_{{ user.id }}" min="0" value="0"><br>
+
+        <!-- Insights Input Field -->
+        <label>Policy Insight/Feedback:</label><br>
+        <textarea name="policy_insight_{{ user.id }}" rows="4" cols="50"
+            placeholder="Write your insights or suggested modifications about the policy..."></textarea><br>
     </div>
     {% endfor %}
-    <button type="submit">Submit Contribution</button>
+    <button type="submit">Submit Contribution and Feedback</button>
 </form>
 {% endblock %}

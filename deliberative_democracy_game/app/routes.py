@@ -9,7 +9,7 @@ from flask import (
     current_app,
 )
 from flask_login import login_user, login_required, logout_user, current_user
-from .models import db, User, Project, CommonMetric, Resource
+from .models import db, User, Project, CommonMetric, Resource, ProjectInsight
 from .forms import LoginForm, ProjectInsightForm
 from .utils import parse_resources, deduct_user_resources, update_metrics
 from . import login_manager  # Only import the necessary initialized extensions
@@ -59,39 +59,49 @@ def project_list():
     return render_template("project_list.html", projects=projects)
 
 
-# Project Detail Route
 @main.route("/project/<int:project_id>", methods=["GET", "POST"])
 @login_required
 def project_detail(project_id):
-    """Display project details and handle user contributions."""
     project = Project.query.get_or_404(project_id)
     users = User.query.all()
     required_resources = parse_resources(project.required_resources)
 
     if request.method == "POST":
-        # Collect contributions from form inputs
         contributions = collect_contributions(users, request)
+        insights = {
+            user.id: request.form.get(f"policy_insight_{user.id}", "").strip()
+            for user in users
+        }
 
-        # Validate user contributions
         if not validate_contributions(users, contributions):
             return render_template("project_detail.html", project=project, users=users)
 
-        # Sum total contributions and check project completion
         if check_project_completion(contributions, required_resources):
             complete_project(project, contributions)
+
+            for user_id, insight_text in insights.items():
+                if insight_text:
+                    new_insight = ProjectInsight(
+                        user_id=user_id, project_id=project.id, insight=insight_text
+                    )
+                    db.session.add(new_insight)
+
+            db.session.commit()
             flash("Project completed successfully!", "success")
             return redirect(url_for("main.finished_projects"))
 
     return render_template("project_detail.html", project=project, users=users)
 
 
-# app/routes.py
 @main.route("/finished_projects")
 @login_required
 def finished_projects():
     """Display a list of completed projects."""
     projects = Project.query.filter_by(is_completed=True).all()
-    return render_template("finished_projects.html", projects=projects)
+    total_projects = Project.query.count()  # Get the total number of projects
+    return render_template(
+        "finished_projects.html", projects=projects, total_projects=total_projects
+    )
 
 
 # Scoreboard Route
@@ -175,3 +185,14 @@ def complete_project(project, contributions):
     update_metrics(project.outcomes, current_user)
     project.is_completed = True
     db.session.commit()
+
+
+# app/routes.py
+
+
+@main.route("/insight")
+@login_required
+def insight():
+    """Display insights written by the current user."""
+    insights = ProjectInsight.query.filter_by(user_id=current_user.id).all()
+    return render_template("insight.html", insights=insights)

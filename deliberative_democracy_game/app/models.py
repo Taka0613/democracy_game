@@ -86,3 +86,23 @@ class CompletedProject(db.Model):
         db.Integer, db.ForeignKey("users.id"), nullable=False
     )
     completion_date = db.Column(db.DateTime, nullable=False)
+
+
+# app/models.py
+
+from . import db
+
+
+class ProjectInsight(db.Model):
+    __tablename__ = "project_insights"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    project_id = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=False)
+    insight = db.Column(db.Text, nullable=False)
+
+    user = db.relationship("User", backref="project_insights")
+    project = db.relationship("Project", backref="project_insights")
+
+    def __repr__(self):
+        return f"<ProjectInsight User {self.user_id} Project {self.project_id}>"

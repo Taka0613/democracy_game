@@ -1,11 +1,21 @@
-<!-- templates/finished_projects.html -->
 {% extends "base.html" %}
 
 {% block title %}Finished Projects{% endblock %}
 
 {% block content %}
 <h2>Finished Projects</h2>
+
 {% if projects %}
+<p>Total Completed Projects: {{ projects|length }}</p>
+
+<!-- Visualization of completed projects -->
+<div class="progress-bar-container">
+    <div class="progress-bar completed"
+        style="width: {{ (projects|length / total_projects) * 100 }}%; max-width: 100%;">
+        {{ (projects|length / total_projects) * 100 | round(1) }}%
+    </div>
+</div>
+
 <ul>
     {% for project in projects %}
     <li>{{ project.name }} - {{ project.description }}</li>
@@ -14,4 +24,5 @@
 {% else %}
 <p>No completed projects available.</p>
 {% endif %}
+
 {% endblock %}
