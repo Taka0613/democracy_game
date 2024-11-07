@@ -18,4 +18,23 @@
     {% endfor %}
 </ul>
 
+<h3>Total Score</h3>
+{% set total_score = calculate_total_score(metrics[0].value, metrics[1].value, metrics[2].value) %}
+
+<!-- Add image for total score -->
+<div class="metric-container">
+    <img src="{{ url_for('static', filename='images/total_score.png') }}" alt="Total Score icon" class="metric-icon">
+    <p><strong>Total Score:</strong> {{ total_score }}</p>
+    <a href="{{ url_for('main.total_score_info') }}">
+        How is the total score calculated?
+    </a>
+
+</div>
+
+<div class="progress-bar-container">
+    <div class="progress-bar total" style="width: {{ total_score }}%; max-width: 100%;">
+        {{ total_score }}%
+    </div>
+</div>
+
 {% endblock %}

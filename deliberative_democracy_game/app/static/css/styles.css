@@ -1,40 +1,114 @@
-.progress-bar-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 8px;
+/* General body styling */
+body {
+    background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+    background-size: cover;
+    background-attachment: fixed;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+/* Dashboard container styling */
+.dashboard-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin: 20px auto;
+    max-width: 1000px;
+    border: 2px solid #4CAF50; /* Matching theme color */
+}
+
+/* Dashboard header styling */
+.dashboard-header {
+    color: #4CAF50; /* Green for emphasis */
+    font-size: 32px;
     margin-bottom: 20px;
-    overflow: hidden;
-    position: relative;
-}
-
-.progress-bar {
-    height: 20px;
-    border-radius: 8px;
     text-align: center;
+}
+
+/* General dashboard info */
+.dashboard-info {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Resource section styling */
+.resource-section {
+    margin-top: 20px;
+}
+
+.resource-list {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.resource-item {
+    background-color: #e6ffe6; /* Light green */
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px;
+    display: flex; /* Use flex to align items horizontally */
+    justify-content: space-between; /* Space between type and amount */
+    align-items: center; /* Center vertically */
+    text-align: left;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 18px; /* Adjust font size for readability */
+    flex-basis: 100%; /* Make sure each item takes up full width */
+}
+
+
+/* Ensure resource-type and resource-amount stay on one line */
+.resource-type {
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px; /* Add space between type and amount */
+}
+
+.resource-amount {
+    color: #555;
+    font-size: 20px; /* Adjust font size for better visibility */
+}
+
+/* Hover effect for resource items */
+.resource-item:hover {
+    background-color: #ccffcc; /* Darker green */
+    border-color: #4CAF50;
+    transform: scale(1.1); /* Subtle zoom effect */
+    transition: transform 0.3s ease-in-out;
+}
+
+
+/* Header styling */
+header {
+    background-color: #4CAF50;
     color: white;
-    font-size: 12px;
-    line-height: 20px;
-    width: 0;
-    /* Initial width for animation */
-    transition: width 1s ease-in-out;
-    /* Smooth animation */
+    padding: 15px;
+    text-align: center;
 }
 
-.progress-bar.environment {
-    background-color: #4caf50;
-    /* Green */
+/* Navigation styling */
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+    font-weight: bold;
 }
 
-.progress-bar.economy {
-    background-color: #2196f3;
-    /* Blue */
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
 }
 
-.progress-bar.welfare {
-    background-color: #ff9800;
-    /* Orange */
-}
-
+/* Metric container styling */
 .metric-container {
     display: flex;
     align-items: center;
@@ -44,20 +118,21 @@
 .metric-icon {
     margin-right: 10px;
     width: 100px;
-    /* Increased width */
     height: 100px;
-    /* Increased height */
 }
 
+/* Progress bar container */
 .progress-bar-container {
     width: 100%;
-    background-color: #f3f3f3;
+    background-color: #e0e0e0;
     border-radius: 8px;
     margin-bottom: 20px;
     overflow: hidden;
     position: relative;
+    border: 1px solid #b3b3b3; /* Subtle border */
 }
 
+/* Individual progress bars */
 .progress-bar {
     height: 20px;
     border-radius: 8px;
@@ -65,41 +140,27 @@
     color: white;
     font-size: 12px;
     line-height: 20px;
-    width: 0;
-    /* Initial width for animation */
+    width: 0; /* Initial width for animation */
     transition: width 1s ease-in-out;
-    /* Smooth animation */
 }
 
-.progress-bar.completed {
-    background-color: #4caf50;
-    /* Green */
+.progress-bar.environment {
+    background-color: #2e8b57; /* Dark green */
 }
 
-body {
-    background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
-    background-size: cover;
-    background-attachment: fixed;
-    color: #333;
-    font-family: Arial, sans-serif;
+.progress-bar.economy {
+    background-color: #1e90ff; /* Bright blue */
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
+.progress-bar.welfare {
+    background-color: #ff8c00; /* Dark orange */
 }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-right: 10px;
+.progress-bar.total {
+    background-color: #d9534f; /* Bright red */
 }
 
-footer {
-    background-color: #333;
-    color: white;
-}
-
+/* Alert styling */
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -133,3 +194,77 @@ footer {
     color: #0c5460;
     border-color: #bee5eb;
 }
+
+/* Resource item styling */
+.resource-item {
+    font-size: 18px; /* Larger font for better visibility */
+    margin-bottom: 10px; /* Spacing between each resource */
+}
+
+/* User box styling */
+.user-box {
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #e6ffe6; /* Light green for better visibility */
+}
+
+/* Finished projects container */
+.finished-projects-container {
+    border: 2px solid #4caf50; /* Green border for emphasis */
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    margin-bottom: 20px;
+}
+
+/* Header for finished projects */
+.finished-projects-header {
+    font-size: 24px;
+    color: #4caf50; /* Green for consistency */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Finished project item */
+.finished-project-item {
+    padding: 10px;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    background-color: #e6ffe6; /* Light green */
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.finished-project-item:hover {
+    background-color: #ccffcc; /* Darker green on hover */
+    border-color: #4caf50;
+}
+
+/* Message for no projects */
+.no-projects-message {
+    font-size: 18px;
+    color: #d9534f; /* Emphasized red */
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Link with spacing */
+.spaced-link {
+    margin-top: 10px;
+    display: block;
+}
+
+/* Finished projects progress bar */
+.progress-bar.completed-projects {
+    background-color: #2e8b57; /* Dark green */
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    line-height: 20px;
+    border-radius: 8px;
+    height: 20px;
+    transition: width 1s ease-in-out;
+}
+

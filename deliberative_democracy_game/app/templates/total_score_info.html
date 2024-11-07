@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Total Score Calculation{% endblock %}
+{% block content %}
+<h2>How the Total Score is Calculated</h2>
+<p>The total score is calculated using a formula that takes into account the values for Environment, Economy, and
+    Welfare. The score is determined as follows:</p>
+<ul>
+    <li><strong>Base Score:</strong> The sum of Environment, Economy, and Welfare metrics.</li>
+    <li><strong>Balance Bonus:</strong> An additional score is added if the metrics are balanced (i.e., the difference
+        between the highest and lowest values is minimal).</li>
+</ul>
+<p>This ensures that both the overall impact and the balance between the different metrics contribute to the final total
+    score.</p>
+{% endblock %}

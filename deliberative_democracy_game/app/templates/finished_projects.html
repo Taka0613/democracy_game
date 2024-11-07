@@ -3,26 +3,27 @@
 {% block title %}Finished Projects{% endblock %}
 
 {% block content %}
-<h2>Finished Projects</h2>
+<div class="finished-projects-container">
+    <h2 class="finished-projects-header">Finished Projects</h2>
 
-{% if projects %}
-<p>Total Completed Projects: {{ projects|length }}</p>
+    {% if projects %}
+    <p>Total Completed Projects: {{ projects|length }}</p>
 
-<!-- Visualization of completed projects -->
-<div class="progress-bar-container">
-    <div class="progress-bar completed"
-        style="width: {{ (projects|length / total_projects) * 100 }}%; max-width: 100%;">
-        {{ (projects|length / total_projects) * 100 | round(1) }}%
+    <!-- Visualization of completed projects -->
+    <div class="progress-bar-container completed-projects-container">
+        <div class="progress-bar completed-projects"
+            style="width: {{ (projects|length / total_projects) * 100 }}%; max-width: 100%;">
+            {{ (projects|length / total_projects) * 100 | round(1) }}%
+        </div>
     </div>
+
+    <ul>
+        {% for project in projects %}
+        <li class="finished-project-item">{{ project.name }} - {{ project.description }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-projects-message">No completed projects available.</p>
+    {% endif %}
 </div>
-
-<ul>
-    {% for project in projects %}
-    <li>{{ project.name }} - {{ project.description }}</li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No completed projects available.</p>
-{% endif %}
-
 {% endblock %}

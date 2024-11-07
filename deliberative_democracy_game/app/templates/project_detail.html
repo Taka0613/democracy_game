@@ -9,8 +9,10 @@
 <form method="POST">
     <h3>Contribute Resources</h3>
     {% for user in users %}
-    <div>
+    <div class="user-box">
         <h4>{{ user.character_name }}</h4>
+
+        {% if user.id == current_user.id %}
         <p><strong>Current Resources:</strong></p>
         <ul>
             {% set user_resources = user.resources|groupby('type') %}
@@ -18,6 +20,7 @@
             <li>{{ resource_type }}: {{ resources[0].amount }}</li>
             {% endfor %}
         </ul>
+        {% endif %}
 
         <!-- Contribution Input Fields -->
         <label>Contribute Labor (Max {{ user.resources | selectattr('type', 'equalto', 'Labor') |

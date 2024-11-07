@@ -11,7 +11,12 @@ from flask import (
 from flask_login import login_user, login_required, logout_user, current_user
 from .models import db, User, Project, CommonMetric, Resource, ProjectInsight
 from .forms import LoginForm, ProjectInsightForm
-from .utils import parse_resources, deduct_user_resources, update_metrics
+from .utils import (
+    parse_resources,
+    deduct_user_resources,
+    update_metrics,
+    calculate_total_score,
+)
 from . import login_manager  # Only import the necessary initialized extensions
 
 # Create Blueprint
@@ -116,13 +121,15 @@ def finished_projects():
     )
 
 
-# Scoreboard Route
 @main.route("/scoreboard")
 @login_required
 def score_board():
-    """Display the scoreboard showing common metrics."""
     common_metrics = CommonMetric.query.all()
-    return render_template("score_board.html", metrics=common_metrics)
+    return render_template(
+        "score_board.html",
+        metrics=common_metrics,
+        calculate_total_score=calculate_total_score,
+    )
 
 
 # Logout Route
@@ -208,3 +215,10 @@ def insight():
     """Display insights written by the current user."""
     insights = ProjectInsight.query.filter_by(user_id=current_user.id).all()
     return render_template("insight.html", insights=insights)
+
+
+@main.route("/total_score_info")
+@login_required
+def total_score_info():
+    """Display how the total score is calculated."""
+    return render_template("total_score_info.html")

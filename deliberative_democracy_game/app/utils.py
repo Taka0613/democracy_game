@@ -53,3 +53,37 @@ def update_metrics(outcomes_str, user):
             metric.value += value
             db.session.add(metric)
     db.session.commit()
+
+
+# utils.py
+
+
+def calculate_total_score(environment_score, economy_score, welfare_score):
+    """
+    Calculate the total score based on the individual scores for environment, economy, and welfare.
+    The function considers both the sum of scores and the balance between them.
+
+    Parameters:
+    - environment_score (int): The score for the environment.
+    - economy_score (int): The score for the economy.
+    - welfare_score (int): The score for welfare.
+
+    Returns:
+    - int: The calculated total score as a percentage (0 to 100).
+    """
+    # Calculate the total sum of the scores
+    total_sum = environment_score + economy_score + welfare_score
+
+    # Find the balance by calculating the standard deviation (lower is better)
+    scores = [environment_score, economy_score, welfare_score]
+    mean_score = total_sum / 3
+    balance_penalty = sum((score - mean_score) ** 2 for score in scores) / 3
+
+    # Adjust the balance penalty to a percentage range (higher balance gives higher score)
+    balance_score = max(0, 100 - balance_penalty)
+
+    # Combine the total sum and balance to create a comprehensive score
+    total_score = (total_sum / 3) * 0.7 + balance_score * 0.3  # Weighted combination
+
+    # Ensure the total score is capped between 0 and 100
+    return min(100, max(0, int(total_score)))

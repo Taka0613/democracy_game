@@ -1,15 +1,25 @@
 {% extends "base.html" %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
-<h2>Welcome, {{ user.character_name }}!</h2>
-<p><strong>Interests:</strong> {{ user.interests }}</p>
-<p><strong>Utility Criteria:</strong> {{ user.utility_criteria }}</p>
-<p><strong>Reading:</strong> {{ user.reading }}</p>
+<div class="dashboard-container">
+    <h2 class="dashboard-header">Welcome, {{ user.character_name }}!</h2>
 
-<h3>Your Resources</h3>
-<ul>
-    {% for resource in user.resources %}
-    <li>{{ resource.type }}: {{ resource.amount }}</li>
-    {% endfor %}
-</ul>
+    <div class="section">
+        <p class="dashboard-info"><strong>Background:</strong> {{ user.interests }}</p>
+        <p class="dashboard-info"><strong>Utility Criteria:</strong> {{ user.utility_criteria }}</p>
+        <p class="dashboard-info"><strong>Reading:</strong> {{ user.reading }}</p>
+    </div>
+
+    <div class="resource-section">
+        <h3>Your Resources</h3>
+        <ul class="resource-list">
+            {% for resource in user.resources %}
+            <li class="resource-item">
+                <span class="resource-type">{{ resource.type }}:</span>
+                <span class="resource-amount">{{ resource.amount }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 {% endblock %}
