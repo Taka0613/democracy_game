@@ -91,16 +91,43 @@ def calculate_total_score(environment_score, economy_score, welfare_score):
 
 def calculate_personal_metric_updates(project, user):
     """Calculate and update the personal metrics for a user based on the project outcomes."""
-    if not hasattr(project, "personal_metric_updates"):
-        return  # No metric updates defined for this project
+    # Convert user ID to string for consistent comparison
+    user_id_str = str(user.id)
 
-    # Update user's personal metrics based on the project's personal_metric_updates
-    for metric, value in project.personal_metric_updates.items():
-        if metric == "Environment":
-            user.environment = (user.environment or 0) + value
-        elif metric == "Money":
-            user.money = (user.money or 0) + value
-        elif metric == "Involvement":
-            user.involvement = (user.involvement or 0) + value
-        elif metric == "Welfare":
-            user.welfare = (user.welfare or 0) + value
+    # Debug print statements to check the types and contents
+    print(f"user.id: {user_id_str}, type: {type(user_id_str)}")
+    print(
+        f"project.personal_metric_updates keys: {list(project.personal_metric_updates.keys())}"
+    )
+    print(
+        f"project.personal_metric_updates key types: {[type(k) for k in project.personal_metric_updates.keys()]}"
+    )
+
+    if (
+        not isinstance(project.personal_metric_updates, dict)
+        or user_id_str not in project.personal_metric_updates
+    ):
+        print(
+            f"No metric updates defined for user ID {user_id_str} or invalid project data."
+        )
+        return  # No updates defined for this user
+
+    # Get user-specific updates from the project
+    updates = project.personal_metric_updates.get(user_id_str, {})
+
+    # Update user's personal metrics based on the project's personal_metric_updates for this user
+    for metric, value in updates.items():
+        if isinstance(
+            value, int
+        ):  # Ensure that the value is an integer before updating
+            if metric == "Environment":
+                user.environment = (user.environment or 0) + value
+            elif metric == "Money":
+                user.money = (user.money or 0) + value
+            elif metric == "Involvement":
+                user.involvement = (user.involvement or 0) + value
+            elif metric == "Welfare":
+                user.welfare = (user.welfare or 0) + value
+
+            # Debug statement for metric update
+            print(f"Updated {metric} for user ID {user.id}: {value}")

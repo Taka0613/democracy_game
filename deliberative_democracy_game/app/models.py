@@ -5,7 +5,6 @@ from flask_login import UserMixin
 
 
 # User Model
-# User Model
 class User(UserMixin, db.Model):
     __tablename__ = "users"
 
@@ -45,7 +44,6 @@ class Resource(db.Model):
         )
 
 
-# Project Model
 class Project(db.Model):
     __tablename__ = "projects"
 
@@ -57,7 +55,7 @@ class Project(db.Model):
     is_completed = db.Column(db.Boolean, default=False)
     personal_metric_updates = db.Column(
         db.JSON, nullable=True
-    )  # JSON column for personal metrics
+    )  # JSON for user-specific metric updates
 
     def __repr__(self):
         return f"<Project {self.name}>"

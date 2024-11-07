@@ -3,17 +3,9 @@
 {% block content %}
 <div class="project-detail-box">
     <h2>{{ project.name }}</h2>
-    <p><strong>Description:</strong> {{ project.description }}</p>
+    <p><strong>Description:</strong> {{ project.description | safe }}</p>
     <p><strong>Required Resources:</strong> {{ project.required_resources }}</p>
     <p><strong>Outcomes:</strong> {{ project.outcomes }}</p>
-
-    <!-- Display Personal Metric Updates -->
-    <p><strong>Personal Metric Updates:</strong></p>
-    <ul>
-        {% for metric, value in project.personal_metric_updates.items() %}
-        <li>{{ metric }}: {{ '+' if value > 0 else '' }}{{ value }}</li>
-        {% endfor %}
-    </ul>
 </div>
 
 <form method="POST">
@@ -25,19 +17,10 @@
         {% if user.id == current_user.id %}
         <p><strong>Current Resources:</strong></p>
         <ul>
-            {% set user_resources = user.resources|groupby('type') %}
+            {% set user_resources = user.resources | groupby('type') %}
             {% for resource_type, resources in user_resources %}
             <li>{{ resource_type }}: {{ resources[0].amount }}</li>
             {% endfor %}
-        </ul>
-
-        <!-- Display Current Personal Metrics -->
-        <p><strong>Current Personal Metrics:</strong></p>
-        <ul>
-            <li>Environment: {{ user.environment if user.environment is not none else 'N/A' }}</li>
-            <li>Money: {{ user.money if user.money is not none else 'N/A' }}</li>
-            <li>Involvement: {{ user.involvement if user.involvement is not none else 'N/A' }}</li>
-            <li>Welfare: {{ user.welfare if user.welfare is not none else 'N/A' }}</li>
         </ul>
         {% endif %}
 

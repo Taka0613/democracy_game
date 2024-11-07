@@ -89,19 +89,21 @@ def project_detail(project_id):
                 project=project,
                 users=users,
                 user_insights=user_insights,
+                user_metric_updates={},
             )
 
         # Check if project completion conditions are met
         if not check_project_completion(contributions, required_resources):
-            db.session.commit()  # Commit insights only if necessary
+            flash("Project requirements not met. Contributions insufficient.", "danger")
             return render_template(
                 "project_detail.html",
                 project=project,
                 users=users,
                 user_insights=user_insights,
+                user_metric_updates={},
             )
 
-        # If validation passes and project is completed, save insights and update metrics
+        # If validation passes and project is completed, save insights
         for user_id, insight_text in user_insights.items():
             if insight_text.strip():  # Check if the insight is not empty
                 new_insight = ProjectInsight(
@@ -109,10 +111,14 @@ def project_detail(project_id):
                 )
                 db.session.add(new_insight)
 
-        # Apply personal metric updates only after the project is completed
+        # Prepare user-specific metric updates and apply them
+        user_metric_updates = {}
         for user in users:
             if user.id in contributions:
                 calculate_personal_metric_updates(project, user)
+                user_metric_updates[user.id] = project.personal_metric_updates.get(
+                    user.id, {}
+                )
                 db.session.add(user)
 
         # Complete the project if all validations pass
@@ -122,8 +128,20 @@ def project_detail(project_id):
         flash("Project completed successfully!", "success")
         return redirect(url_for("main.finished_projects"))
 
+    # Prepare metric updates for rendering if not POST
+    user_metric_updates = {}
+    if project.personal_metric_updates:
+        for user_id, updates in project.personal_metric_updates.items():
+            user_metric_updates[user_id] = {
+                metric: int(value) for metric, value in updates.items()
+            }
+
     return render_template(
-        "project_detail.html", project=project, users=users, user_insights=user_insights
+        "project_detail.html",
+        project=project,
+        users=users,
+        user_insights=user_insights,
+        user_metric_updates=user_metric_updates,
     )
 
 
