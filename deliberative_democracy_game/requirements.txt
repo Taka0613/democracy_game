@@ -1,3 +1,4 @@
+# Flask and related packages
 Flask==2.2.2
 Flask-Cors==5.0.0
 Flask-Login==0.6.2
@@ -8,12 +9,10 @@ Werkzeug==2.2.2
 WTForms==3.2.1
 
 # Database and migration tools
-SQLAlchemy>=1.4.18,<2.1  # Restricting to avoid conflicts
+SQLAlchemy>=1.4.18,<2.1
 alembic==1.13.2
-eralchemy==1.5.0
-sqlalchemy_schemadisplay>=2.0,<2.1  # Align with compatible SQLAlchemy version
 
-# Machine learning and analysis
+# Data analysis and machine learning packages
 numpy>=1.23,<2.0
 pandas==1.5.1
 scikit-learn==1.5.1
@@ -24,35 +23,27 @@ catboost==1.2.7
 optuna==3.6.1
 statsmodels==0.14.2
 pymc==5.17.0
-pmdarima==2.0.4
 
-# Visualization
+# Visualization packages
 matplotlib==3.9.1
 seaborn==0.13.2
 plotly==5.23.0
 
-# Utilities and tools
-black==24.8.0
-flake8==7.1.1
+# Essential utilities
 Cython==3.0.10
 tqdm==4.66.4
 PyYAML==6.0.1
-rich==13.9.3
-pytest==8.3.3
-
-# Miscellaneous
-pathspec==0.12.1
-pluggy==1.5.0
-six==1.16.0
 requests==2.32.3
-tzdata==2024.1
-colorlog==6.8.2
+
+# WebSocket and event handling
 eventlet==0.33.3
-simple-websocket==1.1.0
 python-engineio==4.10.1
 python-socketio==5.11.4
+simple-websocket==1.1.0
 
-# Package management
+# Logging and color support
+colorlog==6.8.2
+
+# Package management and wheel support
 wheel>=0.40.0
 setuptools>=65.5.0
-
