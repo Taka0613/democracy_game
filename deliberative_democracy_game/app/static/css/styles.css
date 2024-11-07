@@ -289,7 +289,7 @@ footer {
     border-radius: 10px;
     padding: 15px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    flex-basis: calc(48% - 10px); /* Responsive for two columns */
+    flex-basis: calc(47% - 10px); /* Responsive for two columns */
 }
 
 .project-title {
@@ -500,3 +500,30 @@ footer {
     }
 }
 
+
+.project-detail-box {
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #b0f33b;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.requirements-box {
+    border: 2px solid #1e90ff;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #e6f7ff; /* Light blue */
+    margin-top: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-box {
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #e6ffe6; /* Light green */
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}

@@ -16,7 +16,9 @@ class User(UserMixin, db.Model):
     reading = db.Column(db.Text, nullable=True)
 
     # Relationships
-    resources = db.relationship("Resource", backref="user", lazy=True)
+    resources = db.relationship(
+        "Resource", backref="user", lazy=True, cascade="all, delete-orphan"
+    )
     metrics = db.relationship("Metric", backref="user", lazy=True)
 
     def __repr__(self):
@@ -86,11 +88,6 @@ class CompletedProject(db.Model):
         db.Integer, db.ForeignKey("users.id"), nullable=False
     )
     completion_date = db.Column(db.DateTime, nullable=False)
-
-
-# app/models.py
-
-from . import db
 
 
 class ProjectInsight(db.Model):

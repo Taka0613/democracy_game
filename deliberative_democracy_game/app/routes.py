@@ -64,7 +64,6 @@ def project_list():
     return render_template("project_list.html", projects=projects)
 
 
-# Project Detail Route
 @main.route("/project/<int:project_id>", methods=["GET", "POST"])
 @login_required
 def project_detail(project_id):
@@ -81,6 +80,11 @@ def project_detail(project_id):
             user.id: request.form.get(f"policy_insight_{user.id}", "") for user in users
         }
 
+        # Debug line: Print user insights collected from the form
+        print("User insights collected from the form:")
+        for user_id, insight in user_insights.items():
+            print(f"User ID {user_id}: {insight}")
+
         # Validate user contributions
         if not validate_contributions(users, contributions):
             flash("Contributions are not valid. Check resource availability.", "danger")
@@ -91,8 +95,26 @@ def project_detail(project_id):
                 user_insights=user_insights,
             )
 
+        # Save insights to the database
+        for user_id, insight_text in user_insights.items():
+            if insight_text.strip():  # Check if the insight is not empty
+                new_insight = ProjectInsight(
+                    user_id=user_id, project_id=project.id, insight=insight_text.strip()
+                )
+                db.session.add(new_insight)
+                # Debug line: Print the insight being added to the database
+                print(f"Adding insight to database: {new_insight}")
+
         # Sum total contributions and check project completion
         if not check_project_completion(contributions, required_resources):
+            db.session.commit()  # Commit insights even if the project isn't completed
+
+            # Debug line: Print all insights in the database
+            all_insights = ProjectInsight.query.all()
+            print("All insights in the database after committing:")
+            for insight in all_insights:
+                print(insight)
+
             return render_template(
                 "project_detail.html",
                 project=project,
@@ -102,6 +124,14 @@ def project_detail(project_id):
 
         # Complete the project if validations pass
         complete_project(project, contributions)
+        db.session.commit()  # Commit contributions and insights
+
+        # Debug line: Print all insights in the database after project completion
+        print("All insights in the database after project completion:")
+        all_insights = ProjectInsight.query.all()
+        for insight in all_insights:
+            print(insight)
+
         flash("Project completed successfully!", "success")
         return redirect(url_for("main.finished_projects"))
 
@@ -214,6 +244,14 @@ def complete_project(project, contributions):
 def insight():
     """Display insights written by the current user."""
     insights = ProjectInsight.query.filter_by(user_id=current_user.id).all()
+    all_insights = ProjectInsight.query.all()  # Fetch all insights for debugging
+
+    # Debugging lines
+    print("Insights for current user:", insights)
+    print("All ProjectInsight entries in the database:")
+    for insight in all_insights:
+        print(insight)
+
     return render_template("insight.html", insights=insights)
 
 

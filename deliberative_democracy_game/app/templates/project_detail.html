@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Project Detail{% endblock %}
 {% block content %}
-<h2>{{ project.name }}</h2>
-<p><strong>Description:</strong> {{ project.description }}</p>
-<p><strong>Required Resources:</strong> {{ project.required_resources }}</p>
-<p><strong>Outcomes:</strong> {{ project.outcomes }}</p>
+<div class="project-detail-box">
+    <h2>{{ project.name }}</h2>
+    <p><strong>Description:</strong> {{ project.description }}</p>
+    <p><strong>Required Resources:</strong> {{ project.required_resources }}</p>
+    <p><strong>Outcomes:</strong> {{ project.outcomes }}</p>
+</div>
 
 <form method="POST">
     <h3>Contribute Resources</h3>
@@ -42,15 +44,16 @@
     </div>
     {% endfor %}
 
-    <!-- Majority Vote Checkboxes -->
-    <h3>Requirements</h3>
-    <input type="checkbox" id="majority-vote" name="majority_vote" onclick="checkSubmitButton()">
-    <label for="majority-vote">Achieved majority vote</label><br>
+    <div class="requirements-box">
+        <h3>Requirements</h3>
+        <input type="checkbox" id="majority-vote" name="majority_vote" onclick="checkSubmitButton()">
+        <label for="majority-vote">Consensus reached</label><br>
 
-    <input type="checkbox" id="revised-policy-vote" name="revised_policy_vote" onclick="checkSubmitButton()">
-    <label for="revised-policy-vote">Revised policy achieved majority vote</label><br>
+        <input type="checkbox" id="revised-policy-vote" name="revised_policy_vote" onclick="checkSubmitButton()">
+        <label for="revised-policy-vote">Consensus reached by policy modification</label><br>
 
-    <button type="submit" id="submit-button" disabled>Submit Contribution and Feedback</button>
+        <button type="submit" id="submit-button" disabled>Submit Contribution and Feedback</button>
+    </div>
 </form>
 
 <script>

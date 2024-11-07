@@ -1,11 +1,12 @@
 from app import create_app, db
-from app.models import User, Project, CommonMetric, Resource
+from app.models import User, Project, CommonMetric, Resource, ProjectInsight
 from app.utils import parse_resources
 
 app = create_app()
 
 with app.app_context():
     # Clear existing data to avoid duplicate entries
+    db.session.query(ProjectInsight).delete()
     db.session.query(Resource).delete()
     db.session.query(User).delete()
     db.session.query(Project).delete()
@@ -114,4 +115,4 @@ with app.app_context():
     db.session.bulk_save_objects(projects)
     db.session.commit()
 
-    print("Database initialized with users, resources, and projects!")
+    print("Database initialized with users, resources, insights, and projects!")
