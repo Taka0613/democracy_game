@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block title %}My Insights{% endblock %}
 {% block content %}
-<h2>My Insights</h2>
+<h2 class="insights-header">My Insights</h2>
 
 {% if insights %}
-<ul>
+<div class="insights-container">
     {% for insight in insights %}
-    <li>
-        <strong>Project:</strong> {{ insight.project.name }}<br>
-        <strong>Your Insight:</strong> {{ insight.insight }}
-    </li>
+    <div class="insight-box">
+        <h3 class="project-title">{{ insight.project.name }}</h3>
+        <p class="insight-text">{{ insight.insight }}</p>
+    </div>
     {% endfor %}
-</ul>
+</div>
 {% else %}
-<p>You have not submitted any insights yet.</p>
+<p class="no-insights-message">You have not submitted any insights yet.</p>
 {% endif %}
 {% endblock %}

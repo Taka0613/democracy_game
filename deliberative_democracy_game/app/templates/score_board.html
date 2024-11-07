@@ -1,39 +1,45 @@
 {% extends "base.html" %}
 {% block title %}Scoreboard{% endblock %}
 {% block content %}
-<h2>Scoreboard</h2>
+<div class="scoreboard-header">
+    <h2>Scoreboard</h2>
+</div>
 
-<ul>
+<!-- Score breakdown for each metric -->
+<div class="scoreboard-metrics">
     {% for metric in metrics %}
-    <li class="metric-container">
+    <div class="metric-card">
         <img src="{{ url_for('static', filename='images/' + metric.type | lower + '.png') }}"
             alt="{{ metric.type }} icon" class="metric-icon">
-        {{ metric.type }}: {{ metric.value }}
-    </li>
-    <div class="progress-bar-container">
-        <div class="progress-bar {{ metric.type | lower }}" style="width: {{ metric.value }}%; max-width: 100%;">
-            {{ metric.value }}%
+        <div class="metric-info">
+            <h3>{{ metric.type }}</h3>
+            <p class="metric-value">{{ metric.value }}</p>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar {{ metric.type | lower }}" style="width: {{ metric.value }}%; max-width: 100%;">
+                {{ metric.value }}%
+            </div>
         </div>
     </div>
     {% endfor %}
-</ul>
-
-<h3>Total Score</h3>
-{% set total_score = calculate_total_score(metrics[0].value, metrics[1].value, metrics[2].value) %}
-
-<!-- Add image for total score -->
-<div class="metric-container">
-    <img src="{{ url_for('static', filename='images/total_score.png') }}" alt="Total Score icon" class="metric-icon">
-    <p><strong>Total Score:</strong> {{ total_score }}</p>
-    <a href="{{ url_for('main.total_score_info') }}">
-        How is the total score calculated?
-    </a>
-
 </div>
 
-<div class="progress-bar-container">
-    <div class="progress-bar total" style="width: {{ total_score }}%; max-width: 100%;">
-        {{ total_score }}%
+<!-- Total score section with full-width box -->
+<div class="total-score-section">
+    <h3>Total Score</h3>
+    {% set total_score = calculate_total_score(metrics[0].value, metrics[1].value, metrics[2].value) %}
+    <div class="total-score-card full-width-box">
+        <div class="metric-info">
+            <img src="{{ url_for('static', filename='images/total_score.png') }}" alt="Total Score icon"
+                class="metric-icon">
+            <p><strong>Total Score:</strong> {{ total_score }}</p>
+            <a href="{{ url_for('main.total_score_info') }}" class="info-link">How is the total score calculated?</a>
+        </div>
+        <div class="progress-bar-container full-width-progress">
+            <div class="progress-bar total" style="width: {{ total_score }}%; max-width: 100%;">
+                {{ total_score }}%
+            </div>
+        </div>
     </div>
 </div>
 

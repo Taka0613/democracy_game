@@ -268,3 +268,234 @@ footer {
     transition: width 1s ease-in-out;
 }
 
+/* General Insights Styling */
+.insights-header {
+    color: #4CAF50; /* Green for visual appeal */
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.insights-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between boxes */
+    justify-content: space-between; /* Spread out the insights */
+}
+
+.insight-box {
+    background-color: #f9f9f9; /* Light background for contrast */
+    border: 2px solid #4CAF50; /* Green border for consistency */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    flex-basis: calc(48% - 10px); /* Responsive for two columns */
+}
+
+.project-title {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.insight-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.no-insights-message {
+    text-align: center;
+    font-size: 18px;
+    color: #d9534f; /* Red for emphasis */
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .insight-box {
+        flex-basis: 100%; /* Full width on smaller screens */
+    }
+}
+
+/* Projects Section Styling */
+.projects-header {
+    color: #4CAF50; /* Green for emphasis */
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between project cards */
+    justify-content: space-between; /* Spread out the cards */
+}
+
+.project-card {
+    background-color: #f9f9f9; /* Light background for contrast */
+    border: 2px solid #4CAF50; /* Green border for consistency */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    flex-basis: calc(48% - 10px); /* Responsive for two columns */
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.project-title {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.project-link {
+    text-decoration: none;
+    color: #4CAF50;
+    transition: color 0.2s;
+}
+
+.project-link:hover {
+    color: #2e8b57; /* Darker green on hover */
+}
+
+.project-description {
+    font-size: 14px;
+    line-height: 1.4;
+    color: #555;
+}
+
+.read-more {
+    text-decoration: none;
+    color: #1e90ff; /* Bright blue for emphasis */
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.no-projects-message {
+    text-align: center;
+    font-size: 18px;
+    color: #d9534f; /* Red for emphasis */
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-card {
+        flex-basis: 100%; /* Full width on smaller screens */
+    }
+}
+
+/* General styling for the scoreboard */
+.scoreboard-header {
+    text-align: center;
+    color: #4CAF50; /* Green for emphasis */
+    margin-bottom: 20px;
+}
+
+.scoreboard-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around; /* Distributes cards evenly */
+}
+
+.metric-card {
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    text-align: center;
+    width: calc(30% - 20px); /* Responsive width */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.metric-card h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.metric-info {
+    margin-bottom: 10px;
+}
+
+.metric-value {
+    font-size: 24px;
+    color: #555;
+    font-weight: bold;
+}
+
+.total-score-section {
+    margin-top: 30px;
+    width: 100%; /* Full page width */
+}
+
+.total-score-card {
+    background-color: #ffe6e6; /* Light pink for distinction */
+    border: 2px solid #d9534f; /* Red border to match the total score color */
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 100%; /* Full width */
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.total-score-card h3 {
+    color: #d9534f; /* Red to match the total score color */
+}
+
+.info-link {
+    color: #1e90ff;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+/* Ensure progress bars stand out */
+.progress-bar {
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    line-height: 20px;
+    width: 0;
+    transition: width 1s ease-in-out;
+}
+
+.progress-bar.environment {
+    background-color: #2e8b57; /* Dark green */
+}
+
+.progress-bar.economy {
+    background-color: #1e90ff; /* Bright blue */
+}
+
+.progress-bar.welfare {
+    background-color: #ff8c00; /* Dark orange */
+}
+
+.progress-bar.total {
+    background-color: #d9534f; /* Red for total score */
+}
+
+.metric-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .metric-card {
+        width: calc(100% - 20px); /* Full width on smaller screens */
+    }
+}

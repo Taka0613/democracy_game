@@ -1,12 +1,22 @@
 {% extends "base.html" %}
 {% block title %}Projects{% endblock %}
 {% block content %}
-<h2>Available Projects</h2>
-<ul>
+<h2 class="projects-header">Available Projects</h2>
+
+{% if projects %}
+<div class="projects-container">
     {% for project in projects %}
-    <li>
-        <a href="{{ url_for('main.project_detail', project_id=project.id) }}">{{ project.name }}</a>
-    </li>
+    <div class="project-card">
+        <h3 class="project-title">
+            <a href="{{ url_for('main.project_detail', project_id=project.id) }}" class="project-link">{{ project.name
+                }}</a>
+        </h3>
+        <p class="project-description">{{ project.description[:100] }}... <a
+                href="{{ url_for('main.project_detail', project_id=project.id) }}" class="read-more">Read more</a></p>
+    </div>
     {% endfor %}
-</ul>
+</div>
+{% else %}
+<p class="no-projects-message">No projects available at the moment. Please check back later.</p>
+{% endif %}
 {% endblock %}
