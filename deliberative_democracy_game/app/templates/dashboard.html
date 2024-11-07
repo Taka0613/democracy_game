@@ -21,5 +21,19 @@
             {% endfor %}
         </ul>
     </div>
+
+    <div class="metric-section">
+        <h3>Your Personal Metrics</h3>
+        <ul class="metric-list">
+            <li class="metric-item"><span class="metric-type">Environment:</span> <span class="metric-value">{{
+                    user.environment }}</span></li>
+            <li class="metric-item"><span class="metric-type">Money:</span> <span class="metric-value">{{ user.money
+                    }}</span></li>
+            <li class="metric-item"><span class="metric-type">Involvement:</span> <span class="metric-value">{{
+                    user.involvement }}</span></li>
+            <li class="metric-item"><span class="metric-type">Welfare:</span> <span class="metric-value">{{ user.welfare
+                    }}</span></li>
+        </ul>
+    </div>
 </div>
 {% endblock %}

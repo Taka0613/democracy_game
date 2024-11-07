@@ -87,3 +87,20 @@ def calculate_total_score(environment_score, economy_score, welfare_score):
 
     # Ensure the total score is capped between 0 and 100
     return min(100, max(0, int(total_score)))
+
+
+def calculate_personal_metric_updates(project, user):
+    """Calculate and update the personal metrics for a user based on the project outcomes."""
+    if not hasattr(project, "personal_metric_updates"):
+        return  # No metric updates defined for this project
+
+    # Update user's personal metrics based on the project's personal_metric_updates
+    for metric, value in project.personal_metric_updates.items():
+        if metric == "Environment":
+            user.environment = (user.environment or 0) + value
+        elif metric == "Money":
+            user.money = (user.money or 0) + value
+        elif metric == "Involvement":
+            user.involvement = (user.involvement or 0) + value
+        elif metric == "Welfare":
+            user.welfare = (user.welfare or 0) + value

@@ -16,6 +16,7 @@ from .utils import (
     deduct_user_resources,
     update_metrics,
     calculate_total_score,
+    calculate_personal_metric_updates,
 )
 from . import login_manager  # Only import the necessary initialized extensions
 
@@ -80,11 +81,6 @@ def project_detail(project_id):
             user.id: request.form.get(f"policy_insight_{user.id}", "") for user in users
         }
 
-        # Debug line: Print user insights collected from the form
-        print("User insights collected from the form:")
-        for user_id, insight in user_insights.items():
-            print(f"User ID {user_id}: {insight}")
-
         # Validate user contributions
         if not validate_contributions(users, contributions):
             flash("Contributions are not valid. Check resource availability.", "danger")
@@ -95,26 +91,9 @@ def project_detail(project_id):
                 user_insights=user_insights,
             )
 
-        # Save insights to the database
-        for user_id, insight_text in user_insights.items():
-            if insight_text.strip():  # Check if the insight is not empty
-                new_insight = ProjectInsight(
-                    user_id=user_id, project_id=project.id, insight=insight_text.strip()
-                )
-                db.session.add(new_insight)
-                # Debug line: Print the insight being added to the database
-                print(f"Adding insight to database: {new_insight}")
-
-        # Sum total contributions and check project completion
+        # Check if project completion conditions are met
         if not check_project_completion(contributions, required_resources):
-            db.session.commit()  # Commit insights even if the project isn't completed
-
-            # Debug line: Print all insights in the database
-            all_insights = ProjectInsight.query.all()
-            print("All insights in the database after committing:")
-            for insight in all_insights:
-                print(insight)
-
+            db.session.commit()  # Commit insights only if necessary
             return render_template(
                 "project_detail.html",
                 project=project,
@@ -122,15 +101,23 @@ def project_detail(project_id):
                 user_insights=user_insights,
             )
 
-        # Complete the project if validations pass
-        complete_project(project, contributions)
-        db.session.commit()  # Commit contributions and insights
+        # If validation passes and project is completed, save insights and update metrics
+        for user_id, insight_text in user_insights.items():
+            if insight_text.strip():  # Check if the insight is not empty
+                new_insight = ProjectInsight(
+                    user_id=user_id, project_id=project.id, insight=insight_text.strip()
+                )
+                db.session.add(new_insight)
 
-        # Debug line: Print all insights in the database after project completion
-        print("All insights in the database after project completion:")
-        all_insights = ProjectInsight.query.all()
-        for insight in all_insights:
-            print(insight)
+        # Apply personal metric updates only after the project is completed
+        for user in users:
+            if user.id in contributions:
+                calculate_personal_metric_updates(project, user)
+                db.session.add(user)
+
+        # Complete the project if all validations pass
+        complete_project(project, contributions)
+        db.session.commit()  # Commit contributions, insights, and metric updates
 
         flash("Project completed successfully!", "success")
         return redirect(url_for("main.finished_projects"))

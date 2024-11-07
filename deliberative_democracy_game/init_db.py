@@ -22,6 +22,7 @@ with app.app_context():
         CommonMetric(type="Welfare", value=5),
     ]
     db.session.bulk_save_objects(metrics)
+    db.session.commit()
 
     # Add users (characters)
     users = [
@@ -31,6 +32,10 @@ with app.app_context():
             utility_criteria="Achieve 10 Environment metric",
             starting_resources="Labor: 1, Money: 2, Time: 3",
             reading="Environmental impact studies and green initiatives.",
+            environment=0,  # Initialize personal metrics with default values
+            money=0,
+            involvement=0,
+            welfare=0,
         ),
         User(
             character_name="Character 2",
@@ -38,6 +43,10 @@ with app.app_context():
             utility_criteria="Achieve 10 Economy metric",
             starting_resources="Labor: 1, Money: 4, Time: 2",
             reading="Economic strategies for city growth.",
+            environment=0,
+            money=0,
+            involvement=0,
+            welfare=0,
         ),
         User(
             character_name="Character 3",
@@ -45,6 +54,10 @@ with app.app_context():
             utility_criteria="Achieve 10 Welfare metric",
             starting_resources="Labor: 2, Money: 2, Time: 3",
             reading="Social programs and community health.",
+            environment=0,
+            money=0,
+            involvement=0,
+            welfare=0,
         ),
         User(
             character_name="Character 4",
@@ -52,6 +65,10 @@ with app.app_context():
             utility_criteria="Achieve a balanced score in all metrics",
             starting_resources="Labor: 2, Money: 3, Time: 2",
             reading="Integrated development plans.",
+            environment=0,
+            money=0,
+            involvement=0,
+            welfare=0,
         ),
         User(
             character_name="Character 5",
@@ -59,6 +76,10 @@ with app.app_context():
             utility_criteria="Complete the most projects",
             starting_resources="Labor: 3, Money: 1, Time: 4",
             reading="Project management and efficiency strategies.",
+            environment=0,
+            money=0,
+            involvement=0,
+            welfare=0,
         ),
     ]
 
@@ -78,37 +99,42 @@ with app.app_context():
 
     db.session.commit()
 
-    # Add sample projects
+    # Add sample projects with personal metric updates
     projects = [
         Project(
             name="Community Park Development",
             description="Develop a community park to improve green space in the neighborhood.",
             outcomes="Environment: +3, Welfare: +2",
             required_resources="Labor: 4, Money: 2, Time: 3",
+            personal_metric_updates={"Environment": 3, "Welfare": 2},
         ),
         Project(
             name="Economic Growth Initiative",
             description="Upgrade local businesses to boost the economy and create jobs.",
             outcomes="Economy: +4, Environment: -1",
             required_resources="Labor: 0, Money: 3, Time: 5",
+            personal_metric_updates={"Money": 4, "Environment": -1},
         ),
         Project(
             name="Health Clinic Establishment",
             description="Build a new health clinic to enhance community healthcare.",
             outcomes="Welfare: +5, Economy: +2",
             required_resources="Labor: 4, Money: 0, Time: 5",
+            personal_metric_updates={"Welfare": 5, "Money": 2},
         ),
         Project(
             name="Renewable Energy Program",
             description="Initiate a renewable energy program to increase sustainability.",
             outcomes="Environment: +6, Economy: +3",
             required_resources="Labor: 0, Money: 6, Time: 4",
+            personal_metric_updates={"Environment": 6, "Economy": 3},
         ),
         Project(
             name="Public Library Construction",
             description="Construct a public library to improve community education and welfare.",
             outcomes="Welfare: +3, Environment: +1",
             required_resources="Labor: 4, Money: 3, Time: 2",
+            personal_metric_updates={"Welfare": 3, "Environment": 1},
         ),
     ]
 

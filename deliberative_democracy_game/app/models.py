@@ -5,6 +5,7 @@ from flask_login import UserMixin
 
 
 # User Model
+# User Model
 class User(UserMixin, db.Model):
     __tablename__ = "users"
 
@@ -15,10 +16,14 @@ class User(UserMixin, db.Model):
     starting_resources = db.Column(db.Text, nullable=True)
     reading = db.Column(db.Text, nullable=True)
 
+    # Personal metrics
+    environment = db.Column(db.Integer, default=0, nullable=True)
+    money = db.Column(db.Integer, default=0, nullable=True)
+    involvement = db.Column(db.Integer, default=0, nullable=True)
+    welfare = db.Column(db.Integer, default=0, nullable=True)
+
     # Relationships
-    resources = db.relationship(
-        "Resource", backref="user", lazy=True, cascade="all, delete-orphan"
-    )
+    resources = db.relationship("Resource", backref="user", lazy=True)
     metrics = db.relationship("Metric", backref="user", lazy=True)
 
     def __repr__(self):
@@ -50,6 +55,9 @@ class Project(db.Model):
     outcomes = db.Column(db.Text, nullable=True)
     required_resources = db.Column(db.Text, nullable=True)
     is_completed = db.Column(db.Boolean, default=False)
+    personal_metric_updates = db.Column(
+        db.JSON, nullable=True
+    )  # JSON column for personal metrics
 
     def __repr__(self):
         return f"<Project {self.name}>"
