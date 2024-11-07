@@ -132,7 +132,8 @@ def validate_contributions(users, contributions):
         user_contrib = contributions[user.id]
         for resource in user.resources:
             resource_type = resource.type.lower()
-            if user_contrib.get(resource_type, 0) > resource.amount:
+            contribution_amount = user_contrib.get(resource_type, 0)
+            if contribution_amount > resource.amount:
                 flash(
                     f"{user.character_name}'s contribution exceeds available {resource.type}.",
                     "danger",
@@ -144,9 +145,9 @@ def validate_contributions(users, contributions):
 def check_project_completion(contributions, required_resources):
     """Check if total contributions meet project requirements."""
     total_contributed = {
-        "time": sum(contrib["time"] for contrib in contributions.values()),
-        "money": sum(contrib["money"] for contrib in contributions.values()),
         "labor": sum(contrib["labor"] for contrib in contributions.values()),
+        "money": sum(contrib["money"] for contrib in contributions.values()),
+        "time": sum(contrib["time"] for contrib in contributions.values()),
     }
     if any(
         total_contributed[res] > required_resources.get(res, 0)
