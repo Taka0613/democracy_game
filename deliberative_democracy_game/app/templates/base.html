@@ -1,0 +1,40 @@
+<!-- templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Game{% endblock %}</title>
+    <!-- Include CSS files -->
+</head>
+
+<body>
+    <header>
+        <h1>Deliberative Democracy Game</h1>
+        {% if current_user.is_authenticated %}
+        <p>Logged in as {{ current_user.character_name }} | <a href="{{ url_for('main.logout') }}">Logout</a></p>
+        {% endif %}
+        <nav>
+            <a href="{{ url_for('main.dashboard') }}">Dashboard</a> |
+            <a href="{{ url_for('main.project_list') }}">Projects</a> |
+            <a href="{{ url_for('main.score_board') }}">Scoreboard</a>
+        </nav>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2023 Deliberative Democracy Game</p>
+    </footer>
+    <!-- Include JS files -->
+</body>
+
+</html>
