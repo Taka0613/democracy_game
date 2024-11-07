@@ -1,6 +1,66 @@
-*.md
-tests/
-docs/
-__pycache__/
+# Exclude virtual environments
+
+.venv/
+env/
+**pycache**/
+
+# Exclude Python cache and compiled files
+
+_.pyc
+_.pyo
+_.pyd
+_.so
+
+# Exclude Git directory
+
 .git/
-.vscode/
+
+# Exclude development and local configuration files
+
+_.log
+.env
+_.yaml
+_.yml
+_.toml
+\*.ini
+
+# Exclude test files and directories
+
+tests/
+test/
+_.test._
+_.spec._
+
+# Exclude documentation and markdown files
+
+docs/
+\*.md
+
+# Exclude build artifacts and distribution files
+
+build/
+dist/
+\*.egg-info/
+
+# Exclude specific unnecessary dependencies and large libraries
+
+pymc/
+catboost/
+xgboost/
+optuna/
+lightgbm/
+
+# Exclude data files and large binaries if not needed for deployment
+
+data/
+_.csv
+_.xlsx
+_.pickle
+_.pkl
+
+# Exclude temporary files and directories
+
+tmp/
+temp/
+.cache/
+coverage/
