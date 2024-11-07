@@ -59,38 +59,50 @@ def project_list():
     return render_template("project_list.html", projects=projects)
 
 
+# Project Detail Route
 @main.route("/project/<int:project_id>", methods=["GET", "POST"])
 @login_required
 def project_detail(project_id):
+    """Display project details and handle user contributions."""
     project = Project.query.get_or_404(project_id)
     users = User.query.all()
     required_resources = parse_resources(project.required_resources)
+    user_insights = {}
 
     if request.method == "POST":
+        # Collect contributions and insights from form inputs
         contributions = collect_contributions(users, request)
-        insights = {
-            user.id: request.form.get(f"policy_insight_{user.id}", "").strip()
-            for user in users
+        user_insights = {
+            user.id: request.form.get(f"policy_insight_{user.id}", "") for user in users
         }
 
+        # Validate user contributions
         if not validate_contributions(users, contributions):
-            return render_template("project_detail.html", project=project, users=users)
+            flash("Contributions are not valid. Check resource availability.", "danger")
+            return render_template(
+                "project_detail.html",
+                project=project,
+                users=users,
+                user_insights=user_insights,
+            )
 
-        if check_project_completion(contributions, required_resources):
-            complete_project(project, contributions)
+        # Sum total contributions and check project completion
+        if not check_project_completion(contributions, required_resources):
+            return render_template(
+                "project_detail.html",
+                project=project,
+                users=users,
+                user_insights=user_insights,
+            )
 
-            for user_id, insight_text in insights.items():
-                if insight_text:
-                    new_insight = ProjectInsight(
-                        user_id=user_id, project_id=project.id, insight=insight_text
-                    )
-                    db.session.add(new_insight)
+        # Complete the project if validations pass
+        complete_project(project, contributions)
+        flash("Project completed successfully!", "success")
+        return redirect(url_for("main.finished_projects"))
 
-            db.session.commit()
-            flash("Project completed successfully!", "success")
-            return redirect(url_for("main.finished_projects"))
-
-    return render_template("project_detail.html", project=project, users=users)
+    return render_template(
+        "project_detail.html", project=project, users=users, user_insights=user_insights
+    )
 
 
 @main.route("/finished_projects")

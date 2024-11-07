@@ -35,9 +35,26 @@
         <!-- Insights Input Field -->
         <label>Policy Insight/Feedback:</label><br>
         <textarea name="policy_insight_{{ user.id }}" rows="4" cols="50"
-            placeholder="Write your insights or suggested modifications about the policy..."></textarea><br>
+            placeholder="Write your insights or suggested modifications about the policy...">{{ user_insights[user.id] if user_insights else '' }}</textarea><br>
     </div>
     {% endfor %}
-    <button type="submit">Submit Contribution and Feedback</button>
+
+    <!-- Majority Vote Checkboxes -->
+    <h3>Requirements</h3>
+    <input type="checkbox" id="majority-vote" name="majority_vote" onclick="checkSubmitButton()">
+    <label for="majority-vote">Achieved majority vote</label><br>
+
+    <input type="checkbox" id="revised-policy-vote" name="revised_policy_vote" onclick="checkSubmitButton()">
+    <label for="revised-policy-vote">Revised policy achieved majority vote</label><br>
+
+    <button type="submit" id="submit-button" disabled>Submit Contribution and Feedback</button>
 </form>
+
+<script>
+    function checkSubmitButton() {
+        const majorityVote = document.getElementById('majority-vote').checked;
+        const revisedPolicyVote = document.getElementById('revised-policy-vote').checked;
+        document.getElementById('submit-button').disabled = !(majorityVote || revisedPolicyVote);
+    }
+</script>
 {% endblock %}
