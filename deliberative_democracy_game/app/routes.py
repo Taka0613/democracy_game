@@ -85,7 +85,7 @@ def project_detail(project_id):
     return render_template("project_detail.html", project=project, users=users)
 
 
-# Finished Projects Route
+# app/routes.py
 @main.route("/finished_projects")
 @login_required
 def finished_projects():

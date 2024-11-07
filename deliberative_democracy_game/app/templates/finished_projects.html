@@ -1,10 +1,17 @@
+<!-- templates/finished_projects.html -->
 {% extends "base.html" %}
+
 {% block title %}Finished Projects{% endblock %}
+
 {% block content %}
-<h2>Completed Projects</h2>
+<h2>Finished Projects</h2>
+{% if projects %}
 <ul>
     {% for project in projects %}
-    <li>{{ project.name }}</li>
+    <li>{{ project.name }} - {{ project.description }}</li>
     {% endfor %}
 </ul>
+{% else %}
+<p>No completed projects available.</p>
+{% endif %}
 {% endblock %}

@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Game{% endblock %}</title>
     <!-- Include CSS files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
 <body>
@@ -18,7 +19,8 @@
         <nav>
             <a href="{{ url_for('main.dashboard') }}">Dashboard</a> |
             <a href="{{ url_for('main.project_list') }}">Projects</a> |
-            <a href="{{ url_for('main.score_board') }}">Scoreboard</a>
+            <a href="{{ url_for('main.score_board') }}">Scoreboard</a> |
+            <a href="{{ url_for('main.finished_projects') }}">Finished Projects</a>
         </nav>
     </header>
     <main>

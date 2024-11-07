@@ -2,9 +2,20 @@
 {% block title %}Scoreboard{% endblock %}
 {% block content %}
 <h2>Scoreboard</h2>
+
 <ul>
     {% for metric in metrics %}
-    <li>{{ metric.type }}: {{ metric.value }}</li>
+    <li class="metric-container">
+        <img src="{{ url_for('static', filename='images/' + metric.type | lower + '.png') }}"
+            alt="{{ metric.type }} icon" class="metric-icon">
+        {{ metric.type }}: {{ metric.value }}
+    </li>
+    <div class="progress-bar-container">
+        <div class="progress-bar {{ metric.type | lower }}" style="width: {{ metric.value }}%; max-width: 100%;">
+            {{ metric.value }}%
+        </div>
+    </div>
     {% endfor %}
 </ul>
+
 {% endblock %}

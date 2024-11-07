@@ -1,0 +1,50 @@
+.progress-bar-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    line-height: 20px;
+    width: 0;
+    /* Initial width for animation */
+    transition: width 1s ease-in-out;
+    /* Smooth animation */
+}
+
+.progress-bar.environment {
+    background-color: #4caf50;
+    /* Green */
+}
+
+.progress-bar.economy {
+    background-color: #2196f3;
+    /* Blue */
+}
+
+.progress-bar.welfare {
+    background-color: #ff9800;
+    /* Orange */
+}
+
+.metric-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.metric-icon {
+    margin-right: 10px;
+    width: 100px;
+    /* Increased width */
+    height: 100px;
+    /* Increased height */
+}
