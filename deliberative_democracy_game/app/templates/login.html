@@ -20,30 +20,180 @@
     {% endfor %}
 </div>
 
+<div class="transition-screen" id="transitionScreen">
+    <div class="rotating-background"></div>
+    <div class="transition-content">
+        <h2>Transforming you into <span id="characterName"></span>...</h2>
+        <div class="loading-animation">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+        <div class="character-silhouette" id="characterSilhouette"></div>
+        <audio id="transformationSound" src="{{ url_for('static', filename='sounds/transformation.mp3') }}"></audio>
+    </div>
+</div>
+
 <script>
     function selectCharacter(characterName) {
+        // Set the character name in the hidden input and display it on the transition screen
         document.getElementById('character_name_input').value = characterName;
-        document.getElementById('login-form').submit();
+        document.getElementById('characterName').innerText = characterName;
+
+        // Display the transition screen and hide the main content
+        document.getElementById('transitionScreen').style.display = 'flex';
+
+        // Update silhouette background image based on character name
+        document.getElementById('characterSilhouette').style.backgroundImage = `url('{{ url_for('static', filename='images/') }}${characterName.replace(/ /g, "_").toLowerCase()}_silhouette.png')`;
+
+        // Play transformation sound
+        document.getElementById('transformationSound').play();
+
+        // Add a slight delay for the user to see the animation before proceeding
+        setTimeout(() => {
+            document.getElementById('login-form').submit();
+        }, 3000); // 3-second delay for transition animation
     }
 </script>
 
 <style>
-    /* Float and bounce effect on character items */
+    /* Character gallery styling */
+    .character-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
+
     .character-item {
-        animation: floatAnimation 3s infinite ease-in-out, shadowPulse 2s infinite ease-in-out;
         cursor: pointer;
-        transition: transform 0.3s ease-in-out;
+        text-align: center;
+        width: 150px;
+        transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+        padding: 10px;
+        border-radius: 15px;
+        background: linear-gradient(145deg, #e0e0e0, #ffffff);
+        box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff;
     }
 
     .character-item:hover {
-        transform: scale(1.1) rotate(5deg);
-        animation: none;
-        /* Stops the animation on hover */
-        box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+        transform: translateY(-10px) scale(1.05);
+        border: 2px solid #4CAF50;
+        box-shadow: 0 15px 25px rgba(76, 175, 80, 0.4);
     }
 
-    /* Keyframes for float animation */
-    @keyframes floatAnimation {
+    .character-item:hover .character-image {
+        filter: brightness(1.2);
+    }
+
+    .character-image {
+        width: 100%;
+        border-radius: 10px;
+        transition: filter 0.3s;
+    }
+
+    .character-item strong {
+        display: block;
+        margin-top: 10px;
+        font-size: 1.2rem;
+        color: #333;
+        transition: color 0.3s;
+    }
+
+    /* Glow effect on hover */
+    .character-item:hover strong {
+        color: #4CAF50;
+        text-shadow: 0 0 5px rgba(76, 175, 80, 0.8);
+    }
+
+    /* Rotating background */
+    .rotating-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(72, 150, 236, 0.8), rgba(0, 0, 0, 0.9));
+        animation: rotateBg 10s linear infinite;
+        z-index: -1;
+    }
+
+    @keyframes rotateBg {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Transition screen styling */
+    .transition-screen {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        color: #ffffff;
+        z-index: 1000;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .transition-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Loading animation */
+    .loading-animation {
+        display: flex;
+        gap: 15px;
+    }
+
+    .circle {
+        width: 20px;
+        height: 20px;
+        background-color: #4CAF50;
+        border-radius: 50%;
+        animation: bounce 1.5s infinite ease-in-out;
+    }
+
+    .circle:nth-child(2) {
+        animation-delay: 0.3s;
+    }
+
+    .circle:nth-child(3) {
+        animation-delay: 0.6s;
+    }
+
+    /* Character silhouette styling */
+    .character-silhouette {
+        width: 150px;
+        height: 300px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin-top: 20px;
+        animation: silhouetteFadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes bounce {
 
         0%,
         100% {
@@ -51,31 +201,20 @@
         }
 
         50% {
-            transform: translateY(-10px);
+            transform: translateY(-20px);
         }
     }
 
-    /* Keyframes for shadow pulsing */
-    @keyframes shadowPulse {
+    @keyframes silhouetteFadeIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
+        }
 
-        0%,
         100% {
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+            opacity: 1;
+            transform: scale(1);
         }
-
-        50% {
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
-        }
-    }
-
-    /* Adding a glow effect on the images */
-    .character-image {
-        border-radius: 8px;
-        transition: filter 0.3s;
-    }
-
-    .character-image:hover {
-        filter: brightness(1.2) saturate(1.3);
     }
 </style>
 {% endblock %}
