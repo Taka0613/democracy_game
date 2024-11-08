@@ -12,7 +12,7 @@ alembic==1.13.2
 numpy<2.0,>=1.23  # If needed, otherwise remove it
 pandas==1.5.1     # If needed, otherwise remove it
 requests==2.32.3
-eventlet==0.33.3
+eventlet==0.31.0
 python-engineio==4.10.1
 python-socketio==5.11.4
 simple-websocket==1.1.0
