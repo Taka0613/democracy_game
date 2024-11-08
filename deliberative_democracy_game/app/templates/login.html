@@ -26,4 +26,56 @@
         document.getElementById('login-form').submit();
     }
 </script>
+
+<style>
+    /* Float and bounce effect on character items */
+    .character-item {
+        animation: floatAnimation 3s infinite ease-in-out, shadowPulse 2s infinite ease-in-out;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .character-item:hover {
+        transform: scale(1.1) rotate(5deg);
+        animation: none;
+        /* Stops the animation on hover */
+        box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+    }
+
+    /* Keyframes for float animation */
+    @keyframes floatAnimation {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    /* Keyframes for shadow pulsing */
+    @keyframes shadowPulse {
+
+        0%,
+        100% {
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.4);
+        }
+
+        50% {
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+        }
+    }
+
+    /* Adding a glow effect on the images */
+    .character-image {
+        border-radius: 8px;
+        transition: filter 0.3s;
+    }
+
+    .character-image:hover {
+        filter: brightness(1.2) saturate(1.3);
+    }
+</style>
 {% endblock %}
