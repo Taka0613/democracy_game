@@ -36,7 +36,7 @@ with app.app_context():
                 "teaching workshops on sustainable living practices. She has two teenage sons, aged 14 and 16, who often "
                 "join her in community clean-up efforts and environmental awareness campaigns."
             ),
-            utility_criteria="Achieve a total of 20 Environment metric points by the end of the game, and influence at least three projects to reduce their negative environmental impacts by 50%.",
+            utility_criteria="Achieve a total of 10 Environment metric points by the end of the game, and influence at least three projects to reduce their negative environmental impacts by 50%.",
             starting_resources="Labor: 10, Money: 10, Time: 10",
             reading="Research on environmental protection and urban sustainability.",
             environment=0,
@@ -53,7 +53,7 @@ with app.app_context():
                 "local residents access sustainable goods at affordable prices. Tom is also an avid reader of economic growth "
                 "strategies and enjoys volunteering at business mentorship programs."
             ),
-            utility_criteria="Achieve at least 15 points in the Economy metric and 10 points in the Environment metric by the end of the game.",
+            utility_criteria="Achieve at least 10 points in the Economy metric and 5 points in the Environment metric by the end of the game.",
             starting_resources="Labor: 17, Money: 8, Time: 8",
             reading="Economic growth and business strategies.",
             environment=0,
@@ -71,7 +71,7 @@ with app.app_context():
                 "and runs a support group for single parents. Her background includes leading neighborhood initiatives for "
                 "affordable housing and fighting for better access to public resources."
             ),
-            utility_criteria="Achieve at least 20 points in the Welfare metric and ensure at least two projects benefit families and community safety.",
+            utility_criteria="Achieve at least 10 points in the Welfare metric and ensure at least two projects benefit families and community safety.",
             starting_resources="Labor: 7, Money: 10, Time: 13",
             reading="Articles on family well-being and community support.",
             environment=0,
@@ -88,7 +88,7 @@ with app.app_context():
                 "improved urban transportation and housing. In his spare time, he enjoys designing model buildings and mentoring "
                 "young architects. He firmly believes in balancing cost-effectiveness with quality to achieve the best results."
             ),
-            utility_criteria="Achieve 15 points in Infrastructure-related Environment metrics and complete at least two major infrastructure projects with a net positive impact.",
+            utility_criteria="Achieve 10 points in Infrastructure-related Environment metrics and complete at least two major infrastructure projects with a net positive impact.",
             starting_resources="Labor: 10, Money: 16, Time: 5",
             reading="Infrastructure projects and urban planning.",
             environment=0,
@@ -105,7 +105,7 @@ with app.app_context():
                 "events and community gatherings. Her main goal is to implement policies that bridge the economic gap while preserving "
                 "the city's natural resources. She enjoys reading about policy development and staying active in local cultural activities."
             ),
-            utility_criteria="Ensure a balanced outcome of at least 15 points each in Environment, Economy, and Welfare metrics by the end of the game.",
+            utility_criteria="Ensure a balanced outcome of at least 5 points each in Environment, Economy, and Welfare metrics by the end of the game.",
             starting_resources="Labor: 15, Money: 8, Time: 12",
             reading="Public service and policy-making articles.",
             environment=0,
@@ -207,7 +207,7 @@ with app.app_context():
             description="Build a subsidized healthcare center in Meadowview."
             "<a href='https://docs.google.com/document/d/13clxdj4hP6CqBGLsF_8vb2hRxwNi_ZNk-Tz3fe3yhFU/edit?usp=sharing' target='_blank'>Read more</a>",
             outcomes="Welfare: +3",
-            required_resources="Labor: 5, Money: 3, Time: 3",
+            required_resources="Labor: 2, Money: 3, Time: 3",
             personal_metric_updates={
                 "1": {"Involvement": 1},
                 "2": {"Welfare": 3, "Involvement": 1},

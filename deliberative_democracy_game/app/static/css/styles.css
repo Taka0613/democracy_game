@@ -582,3 +582,51 @@ footer {
     border-radius: 8px;
     margin-bottom: 10px;
 }
+
+.personal-metrics-box {
+    background-color: #b0f33b; /* Light background for readability */
+    border: 2px solid #4CAF50; /* Green border for consistency */
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.personal-metrics-box h3 {
+    color: #090a09; /* Green for header emphasis */
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.personal-metric-list {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 0;
+}
+
+.personal-metric-item {
+    background-color: #0e100e; /* Light green for better readability */
+    border: 1px solid #4CAF50;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.personal-metric-item strong {
+    color: #333; /* Dark text for contrast */
+}
+
+.personal-metric-item ul {
+    margin-top: 5px;
+    padding-left: 20px; /* Indent list for clarity */
+}
+
+.personal-metric-item li {
+    color: #555; /* Medium gray for metrics */
+    font-size: 16px;
+}
+
+.personal-metric-item p {
+    color: #d9534f; /* Red for emphasis when no updates are available */
+    font-weight: bold;
+}
