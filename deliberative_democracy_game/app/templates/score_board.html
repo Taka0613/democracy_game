@@ -6,11 +6,9 @@
 </div>
 
 <!-- Important survival message -->
-<div class="survival-message"
-    style="background-color: #ffe6e6; border: 2px solid #d9534f; border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: center; font-size: 18px; color: #d9534f; font-weight: bold;">
+<div class="survival-message">
     <p>To ensure Atlas's survival, each metric must reach at least 50%!</p>
 </div>
-
 
 <!-- Score breakdown for each metric -->
 <div class="scoreboard-metrics">
@@ -50,4 +48,141 @@
     </div>
 </div>
 
+<style>
+    .scoreboard-header {
+        text-align: center;
+        font-size: 3rem;
+        color: #2e8b57;
+        margin-bottom: 20px;
+        animation: headerGlow 3s infinite alternate;
+    }
+
+    .survival-message {
+        background-color: #ffe6e6;
+        border: 2px solid #d9534f;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 18px;
+        color: #d9534f;
+        font-weight: bold;
+        animation: fadeIn 2s;
+    }
+
+    .metric-card {
+        background: linear-gradient(145deg, #f9f9f9, #e0e0e0);
+        border: 2px solid #4CAF50;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.7);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .metric-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(76, 175, 80, 0.3);
+    }
+
+    .metric-icon {
+        width: 100px;
+        height: auto;
+        margin-bottom: 15px;
+        animation: rotateIcon 6s linear infinite;
+    }
+
+    .progress-bar-container {
+        background-color: #f1f1f1;
+        border-radius: 10px;
+        margin-top: 10px;
+        overflow: hidden;
+        height: 20px;
+    }
+
+    .progress-bar {
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        color: white;
+        border-radius: 10px;
+        animation: growBar 1s ease-out;
+    }
+
+    .progress-bar.environment {
+        background-color: #2e8b57;
+    }
+
+    .progress-bar.economy {
+        background-color: #1e90ff;
+    }
+
+    .progress-bar.welfare {
+        background-color: #ff8c00;
+    }
+
+    .progress-bar.total {
+        background-color: #d9534f;
+    }
+
+    .total-score-card {
+        background: linear-gradient(135deg, #fff5f5, #ffe6e6);
+        border: 2px solid #d9534f;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 -5px 15px rgba(255, 255, 255, 0.5);
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .metric-info h3 {
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .metric-value {
+        font-size: 1.8rem;
+        color: #2e8b57;
+        font-weight: bold;
+    }
+
+    @keyframes headerGlow {
+        0% {
+            text-shadow: 0 0 10px #2e8b57, 0 0 20px #2e8b57, 0 0 30px #2e8b57;
+        }
+
+        100% {
+            text-shadow: 0 0 20px #66cdaa, 0 0 40px #2e8b57, 0 0 60px #66cdaa;
+        }
+    }
+
+    @keyframes rotateIcon {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes growBar {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 100%;
+        }
+    }
+</style>
 {% endblock %}
