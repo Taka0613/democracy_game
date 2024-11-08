@@ -72,7 +72,7 @@ def calculate_total_score(environment_score, economy_score, welfare_score):
     - int: The calculated total score as a percentage (0 to 100).
     """
     # Calculate the total sum of the scores
-    total_sum = environment_score + economy_score + welfare_score
+    total_sum = (8 / 3) * environment_score + economy_score + welfare_score
 
     # Find the balance by calculating the standard deviation (lower is better)
     scores = [environment_score, economy_score, welfare_score]
