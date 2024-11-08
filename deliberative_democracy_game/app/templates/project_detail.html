@@ -8,6 +8,27 @@
     <p><strong>Outcomes:</strong> {{ project.outcomes }}</p>
 </div>
 
+<!-- Display personal metric updates for the logged-in user -->
+<div class="personal-metrics-box">
+    <h3>Your Personal Metric Updates</h3>
+    {% if project.personal_metric_updates %}
+    {% set current_user_id = current_user.id|string %}
+    {% if current_user_id in project.personal_metric_updates %}
+    {% set updates = project.personal_metric_updates[current_user_id] %}
+    <ul class="personal-metric-list">
+        {% for metric, value in updates.items() %}
+        <li>{{ metric }}: {{ value }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No personal metric updates for this project.</p>
+    {% endif %}
+    {% else %}
+    <p>No personal metric updates available for this project.</p>
+    {% endif %}
+</div>
+
+
 <form method="POST">
     <h3>Contribute Resources</h3>
     {% for user in users %}
@@ -25,17 +46,26 @@
         {% endif %}
 
         <!-- Contribution Input Fields -->
-        <label>Contribute Labor (Max {{ user.resources | selectattr('type', 'equalto', 'Labor') |
-            map(attribute='amount') | sum }}):</label>
-        <input type="number" name="contribute_labor_{{ user.id }}" min="0" value="0"><br>
+        <label>Contribute Labor:</label>
+        <input type="number" name="contribute_labor_{{ user.id }}" min="0" value="0">
+        {% if user.id == current_user.id %}
+        <span>(Max {{ user.resources | selectattr('type', 'equalto', 'Labor') | map(attribute='amount') | sum }})</span>
+        {% endif %}
+        <br>
 
-        <label>Contribute Money (Max {{ user.resources | selectattr('type', 'equalto', 'Money') |
-            map(attribute='amount') | sum }}):</label>
-        <input type="number" name="contribute_money_{{ user.id }}" min="0" value="0"><br>
+        <label>Contribute Money:</label>
+        <input type="number" name="contribute_money_{{ user.id }}" min="0" value="0">
+        {% if user.id == current_user.id %}
+        <span>(Max {{ user.resources | selectattr('type', 'equalto', 'Money') | map(attribute='amount') | sum }})</span>
+        {% endif %}
+        <br>
 
-        <label>Contribute Time (Max {{ user.resources | selectattr('type', 'equalto', 'Time') |
-            map(attribute='amount') | sum }}):</label>
-        <input type="number" name="contribute_time_{{ user.id }}" min="0" value="0"><br>
+        <label>Contribute Time:</label>
+        <input type="number" name="contribute_time_{{ user.id }}" min="0" value="0">
+        {% if user.id == current_user.id %}
+        <span>(Max {{ user.resources | selectattr('type', 'equalto', 'Time') | map(attribute='amount') | sum }})</span>
+        {% endif %}
+        <br>
 
         <!-- Insights Input Field -->
         <label>Policy Insight/Feedback:</label><br>

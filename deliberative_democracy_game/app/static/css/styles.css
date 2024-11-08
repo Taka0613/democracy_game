@@ -366,14 +366,17 @@ footer {
     justify-content: space-around; /* Distributes cards evenly */
 }
 
+/* Container styling to hold icon and text */
 .metric-card {
+    position: relative; /* Needed for positioning child elements */
     border: 2px solid #4CAF50;
     border-radius: 10px;
-    padding: 15px;
+    padding: 30px 15px; /* Adjusted padding for space */
     background-color: #f9f9f9;
     text-align: center;
     width: calc(30% - 20px); /* Responsive width */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ensure content stays within */
 }
 
 .metric-card h3 {
@@ -382,8 +385,11 @@ footer {
     color: #333;
 }
 
+/* Adjusted styling for text to show over the icon */
 .metric-info {
-    margin-bottom: 10px;
+    position: relative;
+    z-index: 2; /* Display text above the icon */
+    color: #333;
 }
 
 .metric-value {
@@ -396,7 +402,7 @@ footer {
 .metric-icon {
     width: 300px; /* Increased size */
     height: auto; /* Maintain aspect ratio */
-    opacity: 0.3; /* Add transparency */
+    opacity: 0.8; /* Add transparency */
     margin-bottom: 10px;
     display: block;
     margin-left: auto;
