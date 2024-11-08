@@ -25,15 +25,142 @@
     <div class="metric-section">
         <h3>Your Personal Metrics</h3>
         <ul class="metric-list">
-            <li class="metric-item"><span class="metric-type">Environment:</span> <span class="metric-value">{{
-                    user.environment }}</span></li>
-            <li class="metric-item"><span class="metric-type">Money:</span> <span class="metric-value">{{ user.money
-                    }}</span></li>
-            <li class="metric-item"><span class="metric-type">Involvement:</span> <span class="metric-value">{{
-                    user.involvement }}</span></li>
-            <li class="metric-item"><span class="metric-type">Welfare:</span> <span class="metric-value">{{ user.welfare
-                    }}</span></li>
+            <li class="metric-item">
+                <span class="metric-type">Environment:</span>
+                <span class="metric-value">{{ user.environment }}</span>
+            </li>
+            <li class="metric-item">
+                <span class="metric-type">Money:</span>
+                <span class="metric-value">{{ user.money }}</span>
+            </li>
+            <li class="metric-item">
+                <span class="metric-type">Involvement:</span>
+                <span class="metric-value">{{ user.involvement }}</span>
+            </li>
+            <li class="metric-item">
+                <span class="metric-type">Welfare:</span>
+                <span class="metric-value">{{ user.welfare }}</span>
+            </li>
         </ul>
     </div>
 </div>
+
+<style>
+    /* General container styling */
+    .dashboard-container {
+        background: linear-gradient(135deg, #ffffff, #e6f7ff);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        animation: fadeInDashboard 1s ease-out;
+    }
+
+    @keyframes fadeInDashboard {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .dashboard-header {
+        font-size: 2.5rem;
+        color: #4CAF50;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        animation: headerPulse 2s infinite alternate;
+    }
+
+    @keyframes headerPulse {
+        0% {
+            transform: scale(1);
+        }
+
+        100% {
+            transform: scale(1.05);
+        }
+    }
+
+    .dashboard-info {
+        font-size: 1.1rem;
+        margin: 10px 0;
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    .dashboard-info:hover {
+        color: #4CAF50;
+    }
+
+    .resource-section,
+    .metric-section {
+        margin-top: 30px;
+    }
+
+    .resource-list,
+    .metric-list {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .resource-item,
+    .metric-item {
+        background: linear-gradient(145deg, #ffffff, #e0e0e0);
+        border: 2px solid #4CAF50;
+        border-radius: 10px;
+        padding: 10px 15px;
+        box-shadow: 5px 5px 10px #b3b3b3, -5px -5px 10px #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.3s, background 0.3s;
+    }
+
+    .resource-item:hover,
+    .metric-item:hover {
+        transform: translateY(-5px);
+        background: #f0fff0;
+        box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
+    }
+
+    .resource-type,
+    .metric-type {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .resource-amount,
+    .metric-value {
+        font-size: 1.2rem;
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+    .metric-section h3,
+    .resource-section h3 {
+        font-size: 1.5rem;
+        color: #333;
+        border-bottom: 2px solid #4CAF50;
+        padding-bottom: 5px;
+        animation: slideIn 1s ease;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
 {% endblock %}
