@@ -4,9 +4,10 @@ Flask-Login==0.6.2
 Flask-Migrate==4.0.7
 Flask-SocketIO==5.3.2
 Flask-SQLAlchemy==2.5.1
+Flask-WTF==1.1.1  # Added Flask-WTF
 Werkzeug==2.2.2
 WTForms==3.2.1
-SQLAlchemy<2.1,>=1.4.18
+SQLAlchemy==1.4.41
 alembic==1.13.2
 numpy<2.0,>=1.23  # If needed, otherwise remove it
 pandas==1.5.1     # If needed, otherwise remove it
@@ -18,4 +19,5 @@ simple-websocket==1.1.0
 colorlog==6.8.2
 PyYAML==6.0.1
 tqdm==4.66.4
+
 
