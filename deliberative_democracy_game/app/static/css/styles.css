@@ -115,12 +115,6 @@ footer {
     margin-bottom: 10px;
 }
 
-.metric-icon {
-    margin-right: 10px;
-    width: 100px;
-    height: 100px;
-}
-
 /* Progress bar container */
 .progress-bar-container {
     width: 100%;
@@ -130,34 +124,6 @@ footer {
     overflow: hidden;
     position: relative;
     border: 1px solid #b3b3b3; /* Subtle border */
-}
-
-/* Individual progress bars */
-.progress-bar {
-    height: 20px;
-    border-radius: 8px;
-    text-align: center;
-    color: white;
-    font-size: 12px;
-    line-height: 20px;
-    width: 0; /* Initial width for animation */
-    transition: width 1s ease-in-out;
-}
-
-.progress-bar.environment {
-    background-color: #2e8b57; /* Dark green */
-}
-
-.progress-bar.economy {
-    background-color: #1e90ff; /* Bright blue */
-}
-
-.progress-bar.welfare {
-    background-color: #ff8c00; /* Dark orange */
-}
-
-.progress-bar.total {
-    background-color: #d9534f; /* Bright red */
 }
 
 /* Alert styling */
@@ -193,12 +159,6 @@ footer {
     background-color: #d1ecf1;
     color: #0c5460;
     border-color: #bee5eb;
-}
-
-/* Resource item styling */
-.resource-item {
-    font-size: 18px; /* Larger font for better visibility */
-    margin-bottom: 10px; /* Spacing between each resource */
 }
 
 /* User box styling */
@@ -432,6 +392,32 @@ footer {
     font-weight: bold;
 }
 
+/* Styling for metric icons */
+.metric-icon {
+    width: 300px; /* Increased size */
+    height: auto; /* Maintain aspect ratio */
+    opacity: 0.3; /* Add transparency */
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Full-width container for the total score card */
+.full-width-box {
+    border: 2px solid #d9534f; /* Match total score color */
+    background-color: rgba(217, 83, 79, 0.1); /* Light background with slight transparency */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.full-width-progress {
+    width: 100%; /* Ensure full width */
+    margin-top: 15px;
+}
+
 .total-score-section {
     margin-top: 30px;
     width: 100%; /* Full page width */
@@ -485,12 +471,6 @@ footer {
 
 .progress-bar.total {
     background-color: #d9534f; /* Red for total score */
-}
-
-.metric-icon {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 10px;
 }
 
 /* Responsive design */
