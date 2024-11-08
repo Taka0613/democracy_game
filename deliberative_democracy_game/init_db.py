@@ -17,9 +17,9 @@ with app.app_context():
 
     # Initialize common metrics
     metrics = [
-        CommonMetric(type="Environment", value=5),
-        CommonMetric(type="Economy", value=5),
-        CommonMetric(type="Welfare", value=5),
+        CommonMetric(type="Environment", value=0),
+        CommonMetric(type="Economy", value=0),
+        CommonMetric(type="Welfare", value=0),
     ]
     db.session.bulk_save_objects(metrics)
     db.session.commit()

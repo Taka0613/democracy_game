@@ -5,6 +5,13 @@
     <h2>Scoreboard</h2>
 </div>
 
+<!-- Important survival message -->
+<div class="survival-message"
+    style="background-color: #ffe6e6; border: 2px solid #d9534f; border-radius: 10px; padding: 15px; margin-bottom: 20px; text-align: center; font-size: 18px; color: #d9534f; font-weight: bold;">
+    <p>To ensure Atlas's survival, each metric must reach at least 50%!</p>
+</div>
+
+
 <!-- Score breakdown for each metric -->
 <div class="scoreboard-metrics">
     {% for metric in metrics %}
@@ -16,8 +23,9 @@
             <p class="metric-value">{{ metric.value }}</p>
         </div>
         <div class="progress-bar-container">
-            <div class="progress-bar {{ metric.type | lower }}" style="width: {{ metric.value }}%; max-width: 100%;">
-                {{ metric.value }}%
+            <div class="progress-bar {{ metric.type | lower }}"
+                style="width: {{ 8 * metric.value }}%; max-width: 100%;">
+                {{ 8 * metric.value }}%
             </div>
         </div>
     </div>
