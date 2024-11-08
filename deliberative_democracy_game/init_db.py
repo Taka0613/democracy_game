@@ -27,7 +27,7 @@ with app.app_context():
     # Add users (characters)
     users = [
         User(
-            character_name="Maya Rivers – The Environmental Advocate",
+            character_name="Maya – The Environmental Advocate",
             interests="Maya is an environmental scientist and activist who has been advocating for sustainable urban development for over a decade. Her goal is to ensure that every project incorporates eco-friendly practices that protect the environment and improve community health.",
             utility_criteria="Complete projects that yield positive Environment metrics and influence at least three projects to reduce their negative environmental impacts by half.",
             starting_resources="Labor: 10, Money: 10, Time: 10",
@@ -38,7 +38,7 @@ with app.app_context():
             welfare=0,
         ),
         User(
-            character_name="Tom Chen – The Local Merchant",
+            character_name="Tom – The Local Merchant",
             interests="Tom is a small business owner who operates a chain of eco-friendly stores. He sees the city’s development projects as potential to grow his business, support the local economy, and provide jobs for residents. However, he must carefully balance profitability with sustainability to maintain his customer base.",
             utility_criteria="Ensure projects benefit the local economy without overly sacrificing the environment. Invest in projects that yield positive economic returns.",
             starting_resources="Labor: 17, Money: 8, Time: 8",
@@ -49,7 +49,7 @@ with app.app_context():
             welfare=0,
         ),
         User(
-            character_name="Nadia Tan – The Single Mother and Community Organizer",
+            character_name="Nadia – The Single Mother and Community Organizer",
             interests="Nadia is a single mother with a deep commitment to improving quality of life in her community. She has organized local events, led initiatives for affordable housing, and works tirelessly to ensure her children have access to safe, healthy spaces in the city.",
             utility_criteria="Complete projects that provide accessible resources and welfare improvements for families. Ensure projects prioritize community welfare and safety.",
             starting_resources="Labor: 7, Money: 10, Time: 13",
@@ -60,7 +60,7 @@ with app.app_context():
             welfare=0,
         ),
         User(
-            character_name="Leo Marshall – The Builder and Infrastructure Expert",
+            character_name="Leo – The Builder and Infrastructure Expert",
             interests="Leo is a seasoned construction manager who sees each project as a challenge to improve the city’s infrastructure efficiently and sustainably. He is driven by a desire to create durable and functional structures that balance budget constraints with quality.",
             utility_criteria="Lead projects that improve urban infrastructure with minimal environmental impact. Use sustainable practices in projects.",
             starting_resources="Labor: 10, Money: 16, Time: 5",
@@ -71,8 +71,8 @@ with app.app_context():
             welfare=0,
         ),
         User(
-            character_name="Alia Patel – The Politician",
-            interests="Alia is a newly elected city council member committed to economic equity and environmental responsibility. She focuses on projects that achieve long-term benefits for the city, ensuring balanced growth for all residents.",
+            character_name="Catharine – The Politician",
+            interests="Catharine is a newly elected city council member committed to economic equity and environmental responsibility. She focuses on projects that achieve long-term benefits for the city, ensuring balanced growth for all residents.",
             utility_criteria="Support projects with balanced positive outcomes across Environment, Economy, and Welfare metrics.",
             starting_resources="Labor: 15, Money: 8, Time: 12",
             reading="Public service and policy-making articles.",

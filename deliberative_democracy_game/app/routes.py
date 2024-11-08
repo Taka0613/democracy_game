@@ -19,15 +19,10 @@ from .utils import (
     calculate_personal_metric_updates,
 )
 from . import login_manager  # Only import the necessary initialized extensions
+import re
 
 # Create Blueprint
 main = Blueprint("main", __name__, template_folder="templates")
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """Load a user by ID for Flask-Login."""
-    return User.query.get(int(user_id))
 
 
 # Login Route
@@ -35,6 +30,7 @@ def load_user(user_id):
 def login():
     """Handle the login of users."""
     form = LoginForm()
+    characters = User.query.all()  # Fetch all users from the database
     if form.validate_on_submit():
         character_name = form.character_name.data
         user = User.query.filter_by(character_name=character_name).first()
@@ -44,7 +40,13 @@ def login():
             return redirect(url_for("main.dashboard"))
         else:
             flash("Character not found.", "danger")
-    return render_template("login.html", form=form)
+    return render_template("login.html", form=form, characters=characters)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    """Load a user by ID for Flask-Login."""
+    return User.query.get(int(user_id))
 
 
 # Dashboard Route
@@ -62,6 +64,9 @@ def dashboard():
 def project_list():
     """List all active projects available for contribution."""
     projects = Project.query.filter_by(is_completed=False).all()
+    # Remove URLs from descriptions
+    for project in projects:
+        project.description = re.sub(r"http\S+|<a .*?>.*?</a>", "", project.description)
     return render_template("project_list.html", projects=projects)
 
 
@@ -70,6 +75,7 @@ def project_list():
 def project_detail(project_id):
     """Display project details and handle user contributions."""
     project = Project.query.get_or_404(project_id)
+    # Clean the project description to exclude any anchor tags
     users = User.query.all()
     required_resources = parse_resources(project.required_resources)
     user_insights = {}
@@ -150,6 +156,9 @@ def project_detail(project_id):
 def finished_projects():
     """Display a list of completed projects."""
     projects = Project.query.filter_by(is_completed=True).all()
+    # Remove URLs from descriptions
+    for project in projects:
+        project.description = re.sub(r"http\S+|<a .*?>.*?</a>", "", project.description)
     total_projects = Project.query.count()  # Get the total number of projects
     return render_template(
         "finished_projects.html", projects=projects, total_projects=total_projects

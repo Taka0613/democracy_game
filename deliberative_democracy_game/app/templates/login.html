@@ -2,9 +2,28 @@
 {% block title %}Login{% endblock %}
 {% block content %}
 <h2>Login</h2>
-<form method="POST">
+<form method="POST" id="login-form">
     {{ form.hidden_tag() }}
-    {{ form.character_name.label }} {{ form.character_name(size=32) }}<br>
-    {{ form.submit() }}
+    <div class="form-group">
+        <input type="hidden" id="character_name_input" name="character_name" value="">
+    </div>
 </form>
+
+<h3>Choose a character to log in:</h3>
+<div class="character-gallery">
+    {% for character in characters %}
+    <div class="character-item" onclick="selectCharacter('{{ character.character_name }}')">
+        <img src="{{ url_for('static', filename='images/' + character.character_name | replace(' ', '_') | lower + '.jpg') }}"
+            alt="{{ character.character_name }}" class="character-image">
+        <strong>{{ character.character_name }}</strong>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function selectCharacter(characterName) {
+        document.getElementById('character_name_input').value = characterName;
+        document.getElementById('login-form').submit();
+    }
+</script>
 {% endblock %}

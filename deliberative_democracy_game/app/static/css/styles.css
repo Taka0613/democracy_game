@@ -553,3 +553,46 @@ footer {
     color: #007bff;
     font-weight: bold;
 }
+
+/* Character list styling for login.html */
+.character-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between each character box */
+    padding: 0;
+}
+
+.character-item strong {
+    font-size: 18px;
+    color: #333;
+}
+
+.character-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.character-item {
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.character-item:hover {
+    transform: scale(1.05);
+}
+
+.character-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
