@@ -14,8 +14,17 @@
 <div class="scoreboard-metrics">
     {% for metric in metrics %}
     <div class="metric-card">
-        <img src="{{ url_for('static', filename='images/' + metric.type | lower + '.png') }}"
-            alt="{{ metric.type }} icon" class="metric-icon">
+        {% if metric.type == 'Environment' %}
+        <img src="{{ url_for('static', filename='images/environment.PNG') }}" alt="Environment icon"
+            class="metric-icon">
+        {% elif metric.type == 'Economy' %}
+        <img src="{{ url_for('static', filename='images/economy.PNG') }}" alt="Economy icon" class="metric-icon">
+        {% elif metric.type == 'Welfare' %}
+        <img src="{{ url_for('static', filename='images/welfare.PNG') }}" alt="Welfare icon" class="metric-icon">
+        {% else %}
+        <img src="{{ url_for('static', filename='images/default_icon.PNG') }}" alt="Default icon" class="metric-icon">
+        {% endif %}
+
         <div class="metric-info">
             <h3>{{ metric.type }}</h3>
             <p class="metric-value">{{ metric.value }}</p>
@@ -29,6 +38,7 @@
     </div>
     {% endfor %}
 </div>
+
 
 <!-- Total score section with full-width box -->
 <div class="total-score-section">
