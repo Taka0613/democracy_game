@@ -15,14 +15,12 @@
     {% for metric in metrics %}
     <div class="metric-card">
         {% if metric.type == 'Environment' %}
-        <img src="{{ url_for('static', filename='images/environment.PNG') }}" alt="Environment icon"
+        <img src="{{ url_for('static', filename='images/environment.png') }}" alt="Environment icon"
             class="metric-icon">
         {% elif metric.type == 'Economy' %}
-        <img src="{{ url_for('static', filename='images/economy.PNG') }}" alt="Economy icon" class="metric-icon">
+        <img src="{{ url_for('static', filename='images/economy.png') }}" alt="Economy icon" class="metric-icon">
         {% elif metric.type == 'Welfare' %}
-        <img src="{{ url_for('static', filename='images/welfare.PNG') }}" alt="Welfare icon" class="metric-icon">
-        {% else %}
-        <img src="{{ url_for('static', filename='images/default_icon.PNG') }}" alt="Default icon" class="metric-icon">
+        <img src="{{ url_for('static', filename='images/welfare.png') }}" alt="Welfare icon" class="metric-icon">
         {% endif %}
 
         <div class="metric-info">
